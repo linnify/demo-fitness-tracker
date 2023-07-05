@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:13
+    container_name: fitness-db
+    environment:
+      POSTGRES_DB: fitness-tracker
+      POSTGRES_USER: linnify
+      POSTGRES_PASSWORD: pass
+    ports:
+      - 5432:5432
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

@@ -1,0 +1,15 @@
+version: '3.0'
+
+services:
+  db:
+    container_name: 'fitness_db'
+    image: postgres:14
+    ports:
+      - 5432:5432
+    env_file:
+      - .db.env
+    volumes:
+      - fitness_data:/var/lib/postgresql/data
+
+volumes:
+  fitness_data:

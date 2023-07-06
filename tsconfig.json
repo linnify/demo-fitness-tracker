@@ -14,15 +14,22 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "typeRoots": ["types/next-auth.d.ts", "types/global.d.ts"],
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@app/*": ["./src/*"],
+      "@app/home/*": ["./src/app/(home)/*"],
+      "@app/account/*": ["./src/app/(home)/account/*"],
+      "@app/order/recommendations/*": ["./src/app/(home)/recommendations/[orderId]/*"],
+      "@app/orders/*": ["./src/app/(home)/orders/*"],
+      "@app/dashboard/*": ["./src/app/(home)/dashboard/*"],
+      "@app/profile/*": ["./src/app/(home)/profile/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "prisma"]
 }

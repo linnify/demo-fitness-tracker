@@ -1,8 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    experimental: {
-        serverActions: true
-    }
-}
+  eslint: {
+    ignoreDuringBuilds: true
+  },
+  swcMinify: true,
+  output: 'standalone',
+  experimental: {
+    serverComponentsExternalPackages: ['@prisma/client']
+  }
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

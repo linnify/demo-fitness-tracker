@@ -2,12 +2,20 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+enum UserLifestyle {
+  SEDENTARY   @map("sedentary")
+  ACTIVE_LOW  @map("active_low")
+  ACTIVE      @map("active")
+  ACTIVE_HIGH @map("active_high")
 }
 
 model User {
@@ -20,10 +28,11 @@ model User {
 }
 
 model PersonalDetails {
-  id     Int     @id @default(autoincrement())
-  height Float
-  weight Float
-  active Boolean
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
+  id        Int           @id @default(autoincrement())
+  height    Float
+  weight    Float
+  lifestyle UserLifestyle
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique
 }

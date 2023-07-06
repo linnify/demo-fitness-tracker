@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+
+    --muted: 220 13% 46%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --border: 220 17% 93%;
+    --input: 214.3 31.8% 91.4%;
+
+    /** Primary Colors **/
+    --primary: hsl(182.857, 23%, 18%);
+    --primary-hover: #1f2d32;
+    --primary-active: #8e98a8;
+    --primary-light: hsl(120, 6%, 84%);
+    --primary-light-hover: #a1aba3;
+    --primary-light-active: #6f7e77;
+    --primary-dark: hsl(208.235, 25%, 14%);
+    --primary-dark-hover: #161a24;
+    --primary-dark-active: #11131d;
+    --primary-darker: hsl(230, 26%, 9%);
+    --primary-foreground: #ffffff;
+
+    /** Accent Colors **/
+    --accent: 112.844 43% 50%;
+    --accent-hover: 103.636 44% 56%;
+    --accent-active: 93.708 45% 61%;
+    --accent-light: 46.154 50% 90%;
+    --accent-light-hover: #dee3ad;
+    --accent-light-active: #cada98;
+    --accent-dark: 126.061 45% 43%;
+    --accent-dark-hover: #338b4e;
+    --accent-dark-active: #297550;
+    --accent-darker: hsl(164.516, 49%, 25%);
+    --accent-foreground: #ffffff;
+
+    /** Success Colors **/
+    --success: 158 61% 31%;
+    --success-light: 159 62% 93%;
+    --success-dark-hover: 158 61% 31%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --popover: #ffffff;
+    --popover-foreground: #000000;
+
+    --card: #ffffff;
+    --card-foreground: #000000;
+
+    --ring: 215 20.2% 65.1%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
+
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+
+    /*
+    --primary: #243839;
+    --primary-hover: #1F2D32;
+    --primary-active: #8E98A8;
+
+    --primar-light: #D3D8D3;
+    --primar-light-hover: #A1ABA3;
+    --primar-light-active: #6F7E77;
+
+    --primar-dark: #1A232B;
+    --primar-dark-hover: #161A24;
+    --primar-dark-active: #11131D;
+
+    --primary-darker: #8E98A8;
+    --primary-foreground: #ffffff;
+    */
+    /*
+
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 210 40% 98%;
+    */
+
+    --accent: 216 34% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --ring: 216 34% 17%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  h1 {
+    @apply scroll-m-20 text-8xl font-bold tracking-tighter;
+  }
+
+  h2 {
+    @apply scroll-m-20 text-6xl font-bold tracking-tight transition-colors;
+  }
+
+  h3 {
+    @apply scroll-m-20 text-5xl font-bold tracking-normal;
+  }
+
+  h4 {
+    @apply scroll-m-20 text-4xl font-semibold tracking-wide;
+  }
+
+  h5 {
+    @apply scroll-m-20 text-2xl font-semibold tracking-normal;
+  }
+
+  h6 {
+    @apply scroll-m-20 text-xl font-semibold tracking-wide;
+  }
+
+  small {
+    @apply text-xs font-medium leading-tight tracking-widest;
+  }
+
+  .text-subtitle-1 {
+    @apply text-base font-normal tracking-wide;
+  }
+
+  .text-subtitle-2 {
+    @apply text-sm font-normal leading-tight;
+  }
+
+  .text-body-1 {
+    @apply text-base font-medium leading-snug;
+  }
+
+  .text-body-2 {
+    @apply text-sm font-normal;
+  }
+
+  .text-caption {
+    @apply text-xs font-medium leading-none tracking-widest;
+  }
+}

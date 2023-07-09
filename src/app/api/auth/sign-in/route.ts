@@ -16,8 +16,8 @@ const emailSignInHandler = async (
 
     const jwtToken = await encodeUser(user);
 
-    const redirectUrl = userData.callbackUrl;
-    const response = NextResponse.redirect(new URL(redirectUrl, envConfig.host, 'GET'));
+    const redirectUrl = userData.callbackUrl || '/calories';
+    const response = NextResponse.redirect(new URL(redirectUrl, envConfig.host));
 
     return setResponseAuthCookie(response, jwtToken);
   } catch (e) {

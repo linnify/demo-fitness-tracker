@@ -25,8 +25,7 @@ export const getServerSession = async (): Promise<Session | null> => {
   return {
     user: {
       email: jwtPayload.email,
-      id: jwtPayload.id,
-      onboarded: jwtPayload.onboarded
+      id: jwtPayload.id
     },
     exp: jwtPayload.exp
   };

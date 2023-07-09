@@ -1,8 +1,8 @@
 import { ZodError, ZodObject } from 'zod';
 import { baseObjectOutputType, ZodRawShape } from 'zod/lib/types';
 import { NextRequest, NextResponse } from 'next/server';
-import { NextRequestContext } from '@app/../../types/core.type';
 import { ZodIssue } from 'zod/lib/ZodError';
+import { NextRequestContext } from '@app/types/core.type';
 
 export type RequestDataContext<T> = NextRequestContext & {
   data: T;

@@ -10,7 +10,17 @@ export const emailSignUpSchema = z.object({
   password: z.string(),
   height: z.number(),
   weight: z.number(),
-  callbackUrl: z.string().optional()
+  callbackUrl: z.string()
 });
 
 export type EmailSignUpData = z.infer<typeof emailSignUpSchema>;
+
+export const emailSignInSchema = z.object({
+  email: z
+    .string()
+    .email()
+    .transform((value) => value.toLowerCase()),
+  password: z.string()
+});
+
+export type EmailSignInData = z.infer<typeof emailSignInSchema>;

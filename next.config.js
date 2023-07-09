@@ -4,10 +4,7 @@ const nextConfig = {
     ignoreDuringBuilds: true
   },
   swcMinify: true,
-  output: 'standalone',
-  experimental: {
-    serverComponentsExternalPackages: ['@prisma/client']
-  }
+  output: 'standalone'
 };
 
 module.exports = nextConfig;

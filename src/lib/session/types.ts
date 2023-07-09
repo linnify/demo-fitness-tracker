@@ -1,7 +1,6 @@
 export type SessionUser = {
   id: number;
   email: string;
-  onboarded: boolean;
 };
 
 export type SessionPayload = SessionUser & {

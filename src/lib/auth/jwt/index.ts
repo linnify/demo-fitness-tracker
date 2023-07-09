@@ -1,7 +1,6 @@
 import { SessionPayload, SessionUser } from '@app/lib/session/types';
 import * as jose from 'jose';
 import { JWTExpireError } from '@app/lib/auth/jwt/types';
-import { UserProfile } from '@app/../../../../types/user.type';
 import envConfig from '@app/config/env.config';
 
 const DEFAULT_MAX_AGE = 1000 * 30 * 24 * 60 * 60; // 30 days
@@ -9,11 +8,15 @@ const AUTH_TOKEN_AUDIENCE = envConfig.environment;
 const AUTH_TOKEN_ISSUER = envConfig.auth.issuer;
 const AUTH_SECRET = envConfig.auth.secret;
 
-export const encodeUser = async (user: UserProfile): Promise<string> => {
+export const encodeUser = async (user: {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+}): Promise<string> => {
   return encode({
     id: user.id,
-    email: user.email,
-    onboarded: !!user.profile?.completedAt
+    email: user.email
   });
 };
 

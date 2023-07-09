@@ -1,9 +1,11 @@
 import { EmailSignUpData } from '@app/lib/auth/validation';
 import { db } from '@app/lib/db';
 import { getHashedPassword } from '@app/features/users/encryption.helper';
-import { User, UserLifestyle } from '@prisma/client';
+import { UserLifestyle } from '@prisma/client';
 
-export const singUp = async (user: EmailSignUpData): Promise<User> => {
+export const singUp = async (
+  user: EmailSignUpData
+): Promise<{ id: number; email: string; firstName: string; lastName: string }> => {
   return await db.user.create({
     data: {
       email: user.email,
@@ -19,6 +21,7 @@ export const singUp = async (user: EmailSignUpData): Promise<User> => {
       }
     },
     select: {
+      id: true,
       email: true,
       firstName: true,
       lastName: true

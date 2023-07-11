@@ -69,7 +69,7 @@ const RadioGroupFormField = <
           {renderLabel && renderLabel()}
           <FormControl>
             <RadioGroup
-              onValueChange={field.onChange}
+              onValueChange={field.onChange as (value: string) => void}
               defaultValue={field.value}
               className={cn('flex flex-col gap-2', classNameRadioGroup)}
             >

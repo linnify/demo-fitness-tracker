@@ -1,7 +1,6 @@
 import { LoginData, RegisterData } from '@app/lib/auth/validation';
 import { db } from '@app/lib/db';
-import { UserLifestyle } from '@prisma/client';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 export const getHashedPassword = (password: string): string => {
   const salt: string = bcrypt.genSaltSync();

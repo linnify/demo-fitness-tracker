@@ -18,6 +18,8 @@ WORKDIR ${APP_DIR}
 COPY --from=deps ${APP_DIR}/node_modules ./node_modules
 COPY . .
 
+RUN npx prisma generate
+
 RUN yarn build
 
 
@@ -33,7 +35,7 @@ COPY --from=builder ${APP_DIR}/public ./public
 
 COPY --from=builder --chown=nextjs:nodejs ${APP_DIR}/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs ${APP_DIR}/.next/static ./.next/static
-COPY --from=deps --chown=nextjs:nodejs ${APP_DIR}/node_modules ./node_modules
+COPY --from=builder --chown=nextjs:nodejs ${APP_DIR}/node_modules ./node_modules
 
 USER nextjs
 

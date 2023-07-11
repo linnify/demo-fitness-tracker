@@ -2,36 +2,35 @@
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { EmailSignInData, emailSignInSchema } from '@app/lib/auth/validation';
+import { LoginData, loginSchema } from '@app/lib/auth/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from '@app/components/core/form';
-import { InputFormField } from '@app/components/form/input.control';
+import { InputFormField, PasswordFormField } from '@app/components/form/input.control';
 import { Button } from '@app/components/core/button';
+import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
+  const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
-  const form = useForm<EmailSignInData>({
-    resolver: zodResolver(emailSignInSchema)
+  const form = useForm<LoginData>({
+    resolver: zodResolver(loginSchema)
   });
 
-  const onSubmit = async (data: EmailSignInData) => {
+  const onSubmit = async (data: LoginData) => {
     setLoading(true);
 
-    // const response = await fetch(`/api/auth/sign-in`, {
-    //   method: 'POST',
-    //   body: JSON.stringify({ ...data, callbackUrl: '/calories' })
-    // });
+    const response = await fetch(`/api/auth/login`, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
     setLoading(false);
 
-    // if (!response?.ok) {
-    //   console.log('error');
-    // return toast({
-    //     title,
-    //     description: 'Your name was not updated. Please try again.',
-    //     variant: 'destructive'
-    //   });
-    // }
-    console.log('success');
+    if (!response?.ok) {
+      console.log('error');
+      return;
+    }
+
+    router.push('/calories');
   };
 
   return (
@@ -46,7 +45,7 @@ const LoginForm = () => {
           label={'Email'}
           className={'max-w-sm'}
         />
-        <InputFormField
+        <PasswordFormField
           control={form.control}
           name={'password'}
           label={'Password'}
@@ -61,7 +60,7 @@ const LoginForm = () => {
           Sign Up
         </Button>
         <div className="flex justify-center">
-          <a className="text-blue-500 focus:outline-none" href="/register">
+          <a className="text-blue-500 focus:outline-none" href="/auth/register">
             You do not have an account?
           </a>
         </div>

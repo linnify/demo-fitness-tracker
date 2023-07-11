@@ -1,6 +1,7 @@
 import * as z from 'zod';
+import { UserLifestyle } from '@prisma/client';
 
-export const emailSignUpSchema = z.object({
+export const registerSchema = z.object({
   email: z
     .string()
     .email()
@@ -10,12 +11,12 @@ export const emailSignUpSchema = z.object({
   password: z.string(),
   height: z.number(),
   weight: z.number(),
-  callbackUrl: z.string()
+  lifestyle: z.nativeEnum(UserLifestyle)
 });
 
-export type EmailSignUpData = z.infer<typeof emailSignUpSchema>;
+export type RegisterData = z.infer<typeof registerSchema>;
 
-export const emailSignInSchema = z.object({
+export const loginSchema = z.object({
   email: z
     .string()
     .email()
@@ -23,4 +24,4 @@ export const emailSignInSchema = z.object({
   password: z.string()
 });
 
-export type EmailSignInData = z.infer<typeof emailSignInSchema>;
+export type LoginData = z.infer<typeof loginSchema>;

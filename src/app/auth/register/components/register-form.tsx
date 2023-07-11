@@ -5,33 +5,60 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from '@app/components/core/form';
 import { Button } from '@app/components/core/button';
-import { InputFormField, InputNumberFormField } from '@app/components/form/input.control';
-import { EmailSignUpData, emailSignUpSchema } from '@app/lib/auth/validation';
+import {
+  InputFormField,
+  InputNumberFormField,
+  PasswordFormField
+} from '@app/components/form/input.control';
+import { RegisterData, registerSchema } from '@app/lib/auth/validation';
+import { useRouter } from 'next/navigation';
+import ProfileRadioGroup, {
+  ProfileRadioGroupValue
+} from '@app/components/form/profile-radio-group';
+import { UserLifestyle } from '@prisma/client';
+
+const lifestyleTitle: Record<UserLifestyle, string> = {
+  [UserLifestyle.SEDENTARY]: 'Sedentary',
+  [UserLifestyle.ACTIVE_LOW]: 'Low Activity',
+  [UserLifestyle.ACTIVE]: 'Active',
+  [UserLifestyle.ACTIVE_HIGH]: 'High Activity'
+};
+
+const lifestyleDescription: Record<UserLifestyle, string> = {
+  [UserLifestyle.SEDENTARY]: 'Not much of a workout person',
+  [UserLifestyle.ACTIVE_LOW]: '1-3 days of working out',
+  [UserLifestyle.ACTIVE]: '3-5 days of working out',
+  [UserLifestyle.ACTIVE_HIGH]: 'Almost everyday of working out'
+};
+
+const lifeStyleOptions: ProfileRadioGroupValue[] = Object.values(UserLifestyle).map((value) => ({
+  value,
+  label: lifestyleTitle[value],
+  description: lifestyleDescription[value]
+}));
 
 const RegisterForm = () => {
+  const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
-  const form = useForm<EmailSignUpData>({
-    resolver: zodResolver(emailSignUpSchema)
+  const form = useForm<RegisterData>({
+    resolver: zodResolver(registerSchema)
   });
 
-  const onSubmit = async (data: EmailSignUpData) => {
+  const onSubmit = async (data: RegisterData) => {
     setLoading(true);
 
-    const response = await fetch(`/api/auth/sign-in`, {
+    const response = await fetch(`/api/auth/register`, {
       method: 'POST',
-      body: JSON.stringify({ ...data, callbackUrl: '/calories' })
+      body: JSON.stringify(data)
     });
     setLoading(false);
 
     if (!response?.ok) {
       console.log('error');
-      // return toast({
-      //     title,
-      //     description: 'Your name was not updated. Please try again.',
-      //     variant: 'destructive'
-      //   });
+      return;
     }
-    console.log('success');
+
+    router.push('/calories');
   };
 
   return (
@@ -58,7 +85,7 @@ const RegisterForm = () => {
           label={'Email'}
           className={'max-w-sm'}
         />
-        <InputFormField
+        <PasswordFormField
           control={form.control}
           name={'password'}
           label={'Password'}
@@ -76,6 +103,12 @@ const RegisterForm = () => {
           label={'Height'}
           className={'max-w-sm'}
         />
+        <ProfileRadioGroup
+          values={lifeStyleOptions}
+          control={form.control}
+          name={'lifestyle'}
+          label={'What type of lifestyle do you have?'}
+        />
 
         <Button
           type="submit"
@@ -85,7 +118,7 @@ const RegisterForm = () => {
           Sign Up
         </Button>
         <div className="flex justify-center">
-          <a className="text-blue-500 focus:outline-none" href="/login">
+          <a className="text-blue-500 focus:outline-none" href="/auth/login">
             You have an account?
           </a>
         </div>

@@ -11,14 +11,14 @@ export default function Home() {
           variant={'outline'}
           className="foxus:outline-none focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
         >
-          <Link href={'/login'}>Login</Link>
+          <Link href={'/auth/login'}>Login</Link>
         </Button>
         <Button
           asChild
           variant={'outline'}
           className="foxus:outline-none focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
         >
-          <Link href={'/register'}>Register</Link>
+          <Link href={'/auth/register'}>Register</Link>
         </Button>
       </div>
     </main>

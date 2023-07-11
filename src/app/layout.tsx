@@ -1,5 +1,8 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
+import { HomeNav } from '@app/app/calories/components/home-nav';
+import React from 'react';
+import { HomeNavNoAuth } from '@app/app/auth/components/home-nav-no-auth';
 
 const inter = Inter({ subsets: ['latin'] });
 

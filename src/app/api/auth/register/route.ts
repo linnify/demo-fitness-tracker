@@ -1,23 +1,19 @@
 import { RequestDataContext, withValidation } from '@app/lib/validation';
-import { EmailSignUpData, emailSignUpSchema } from '@app/lib/auth/validation';
+import { RegisterData, registerSchema } from '@app/lib/auth/validation';
 import { NextRequest, NextResponse } from 'next/server';
 import { singUp } from '@app/features/users/user.service';
 import { encodeUser } from '@app/lib/auth/jwt';
 import envConfig from '@app/config/env.config';
 import { setResponseAuthCookie } from '@app/lib/auth/cookies';
 
-const emailSignInHandler = async (
-  req: NextRequest,
-  context: RequestDataContext<EmailSignUpData>
-) => {
+const emailSignInHandler = async (req: NextRequest, context: RequestDataContext<RegisterData>) => {
   try {
     const userData = context.data;
     const user = await singUp(userData);
 
     const jwtToken = await encodeUser(user);
 
-    const redirectUrl = userData.callbackUrl || '/calories';
-    const response = NextResponse.redirect(new URL(redirectUrl, envConfig.host));
+    const response = NextResponse.json({}, { status: 201 });
 
     return setResponseAuthCookie(response, jwtToken);
   } catch (e) {
@@ -26,4 +22,4 @@ const emailSignInHandler = async (
   }
 };
 
-export const POST = withValidation(emailSignUpSchema, emailSignInHandler);
+export const POST = withValidation(registerSchema, emailSignInHandler);

@@ -25,6 +25,10 @@ model User {
   lastName        String
   password        String
   personalDetails PersonalDetails?
+
+  meals EatenMeal[]
+
+  @@map("users")
 }
 
 model PersonalDetails {
@@ -33,6 +37,39 @@ model PersonalDetails {
   weight    Float
   lifestyle UserLifestyle
 
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int  @unique
+
+  @@map("personal_details")
+}
+
+model Meal {
+  id Int @id @default(autoincrement())
+
+  name          String
+  image         String?
+  grams         Float   @default(100)
+  calories      Float
+  proteins      Float
+  carbohydrates Float
+  fats          Float
+
+  eatenMeals EatenMeal[]
+
+  @@map("meals")
+}
+
+model EatenMeal {
+  id    Int   @id @default(autoincrement())
+  value Float
+
+  mealId Int  @map("meal_id")
+  meal   Meal @relation(fields: [mealId], references: [id], onDelete: Cascade)
+  userId Int  @map("user_id")
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
+
+  @@map("eaten_meals")
 }

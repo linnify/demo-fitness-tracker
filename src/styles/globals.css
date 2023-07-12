@@ -69,26 +69,26 @@
     --input: 216 34% 17%;
 
     /*
-    --primary: #243839;
-    --primary-hover: #1F2D32;
-    --primary-active: #8E98A8;
+        --primary: #243839;
+        --primary-hover: #1F2D32;
+        --primary-active: #8E98A8;
 
-    --primar-light: #D3D8D3;
-    --primar-light-hover: #A1ABA3;
-    --primar-light-active: #6F7E77;
+        --primar-light: #D3D8D3;
+        --primar-light-hover: #A1ABA3;
+        --primar-light-active: #6F7E77;
 
-    --primar-dark: #1A232B;
-    --primar-dark-hover: #161A24;
-    --primar-dark-active: #11131D;
+        --primar-dark: #1A232B;
+        --primar-dark-hover: #161A24;
+        --primar-dark-active: #11131D;
 
-    --primary-darker: #8E98A8;
-    --primary-foreground: #ffffff;
-    */
+        --primary-darker: #8E98A8;
+        --primary-foreground: #ffffff;
+        */
     /*
 
-    --secondary: 222.2 47.4% 11.2%;
-    --secondary-foreground: 210 40% 98%;
-    */
+        --secondary: 222.2 47.4% 11.2%;
+        --secondary-foreground: 210 40% 98%;
+        */
 
     --accent: 216 34% 17%;
     --accent-foreground: 210 40% 98%;
@@ -106,6 +106,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings: 'rlig' 1, 'calt' 1;

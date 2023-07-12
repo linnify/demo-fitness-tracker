@@ -68,3 +68,11 @@ export function getDateAsString(date: Date): string {
 
   return `${DAYS[dayOfTheWeek]}, ${dayOfTheMonth} ${MONTHS[month]}`;
 }
+
+export const displayFractionalNumberLocale = (value: number | string): string => {
+  const numberValue: number = typeof value === 'string' ? +value : value;
+  return (numberValue ? numberValue : 0).toLocaleString(navigator.language, {
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 2
+  });
+};

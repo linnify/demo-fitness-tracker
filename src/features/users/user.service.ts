@@ -1,13 +1,25 @@
 import { LoginData, RegisterData } from '@app/lib/auth/validation';
 import { db } from '@app/lib/db';
 import bcrypt from 'bcryptjs';
+import { SessionUser } from '@app/lib/session/types';
+import { getServerSession } from '@app/lib/auth/session';
+import { redirect } from 'next/navigation';
 
 export const getHashedPassword = (password: string): string => {
   const salt: string = bcrypt.genSaltSync();
 
   return bcrypt.hashSync(password, salt);
 };
+export async function getUserSession(): Promise<SessionUser> {
+  const session = await getServerSession();
+  const user = session?.user;
 
+  if (!user) {
+    return redirect('/auth');
+  }
+
+  return user;
+}
 export const login = async (
   userData: LoginData
 ): Promise<{ id: number; email: string; firstName: string; lastName: string }> => {

@@ -1,7 +1,9 @@
-export default function Register() {
+import Container from '@app/app/calories/components/container';
+
+export default function Calories() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full">My calories</div>
+    <main className="flex min-h-screen flex-col items-center gap-20 p-24">
+      <Container />
     </main>
   );
 }
